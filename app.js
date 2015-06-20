@@ -6,7 +6,6 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 
-
 const courses = require('./routes/courses');
 const search = require('./routes/search');
 const users = require('./routes/users');
@@ -26,8 +25,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(cors());
 
 app.use('/courses', courses);
-app.use('/search', search);
-app.use('/users', users);
+// app.use('/search', search);
+// app.use('/users', users);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -35,6 +34,5 @@ app.use(function(req, res, next) {
   err.status = 404;
   next(err);
 });
-
 
 module.exports = app;

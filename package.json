@@ -14,6 +14,8 @@
     "express": "~4.12.2",
     "jade": "~1.9.2",
     "less-middleware": "1.0.x",
+    "moment": "^2.10.3",
+    "mongoose": "^4.0.5",
     "morgan": "~1.5.1",
     "mysql": "^2.6.2",
     "oauth2orize": "^1.0.1",
@@ -21,6 +23,7 @@
     "passport-facebook": "^2.0.0",
     "passport-http": "^0.2.2",
     "passport-local": "^1.0.0",
-    "serve-favicon": "~2.2.0"
+    "serve-favicon": "~2.2.0",
+    "underscore": "^1.8.3"
   }
 }

@@ -1,65 +1,38 @@
-var express = require('express');
-var router  = express.Router();
-var db      = require('./db');
+'use_strict';
 
+const express  = require('express');
+const router   = express.Router();
+const moment   = require('moment');
+const _        = require('underscore');
+const mongoose = require('mongoose');
+const schemas  = require('../schemas');
 
-db.connect();
+mongoose.connect(process.env.MONGO_PORT_27017_TCP_ADDR);
+const db = mongoose.connection;
 
+const Course = schemas.Course;
 
-router.get('/', function(req, res, next) {
-  db.query('SELECT title, abbr FROM courses', function (err, results, fields) {
-    res.json(results);
-  });
-});
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function(callback) {
 
-router.get('/:abbr', function(req, res, next) {
-  const sqlString = 'SELECT * FROM courses ' +
-                    'LEFT JOIN sections ' +
-                    'ON courses.id = sections.course_id ' + 
-                    'WHERE courses.abbr = ?';
-  db.query(sqlString, [req.params.abbr], function(err, results, fields) {
-    var jsonResponse = {
-      title: results[0].title,
-      abbr: results[0].abbr,
-      credits: results[0].credits,
-      description: results[0].description,
-      sections: [ ]
-    };
-
-    results.forEach(function (section, index, array) {
-      var days = '';
-      if (section.m === 1) { days = days.concat('M'); } 
-      if (section.t === 1) { days = days.concat('T'); } 
-      if (section.w === 1) { days = days.concat('W'); } 
-      if (section.r === 1) { days = days.concat('R'); } 
-      if (section.f === 1) { days = days.concat('F'); }
-
-      jsonResponse.sections[index] = {
-        term: section.term,
-        start_date: section.start_date,
-        end_date: section.end_date,
-        session: section.session,
-        crn: section.crn,
-        section_number: section.sec,
-        credits: section.credits,
-        instructor: section.instructor,
-        days: days,
-        start_time: section.start_time,
-        end_time: section.end_time,
-        location: section.location,
-        campus: section.campus,
-        type: section.type,
-        status: section.status,
-        cap: section.cap,
-        enrolled: section.enrolled,
-        waitlist_cap: section.wl_cap,
-        waitlist_current: section.wl_current,
-        fees: section.fees,
-        restrictions: section.restrictions,
-        comments: section.comments
-      };
+  router.get('/', function(req, res, next) {
+    Course.find({}, 'title abbr').sort('title').exec(function(err, course) {
+      res.json(course);
     });
-  res.json(jsonResponse);
+  });
+
+  router.get('/:abbr', function(req, res, next) {
+    Course.findOne({ abbr: req.params.abbr }, function(err, course) {
+      if (!course) res.json(404, {error: 'Empty search'});
+
+      _.each(course.sections, function(section) {
+        section.startTime = moment(section.startTime).format('HH:mm');
+        section.endTime = moment(section.endTime).format('HH:mm');
+      });
+
+      res.json(course);
+    });
+
   });
 });
 
