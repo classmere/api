@@ -6,11 +6,14 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 
+const PORT = process.env.PORT || 80;
+
 const courses = require('./routes/courses');
 const search = require('./routes/search');
 
 var app = express();
 app.listen(80);
+console.log('Listening on port ' + PORT);
 
 // Allow cross-origin resource sharing
 app.use(cors());
