@@ -12,7 +12,7 @@ const courses = require('./routes/courses');
 const search = require('./routes/search');
 
 var app = express();
-app.listen(80);
+app.listen(PORT);
 console.log('Listening on port ' + PORT);
 
 // Allow cross-origin resource sharing
