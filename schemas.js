@@ -1,6 +1,13 @@
+// schemas.js
+
+// Import and initilize mongooose
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
+// =============================================================================
+// DEFINE SCHEMAS
+
+// Initilize section schema
 const sectionSchema = new Schema({
   term: String,
   startDate: Date,
@@ -26,6 +33,8 @@ const sectionSchema = new Schema({
   comments: String
 });
 
+// -----------------------------------------------------------------------------
+// Initilize course schema
 const courseSchema = new Schema({
   title: String,
   abbr: String,
@@ -39,6 +48,11 @@ const courseSchema = new Schema({
   }
 });
 
+// =============================================================================
+// DEFINE SCHEMAS
+
+// Initilize course model with course schema
 const Course = mongoose.model('Course', courseSchema);
 
+// Export model
 exports.Course = Course;
