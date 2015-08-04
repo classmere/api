@@ -1,16 +1,14 @@
-// app.js
-
-// Import dependencies
 const express = require('express');
 const logger = require('morgan');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 
-// =============================================================================
-// MOUNT MIDDLEWARE FUNCTIONS
+// ----- MOUNT MIDDLEWARE FUNCTIONS -----
 
 // Import routes
 const courses = require('./routes/courses');
+
+// TODO
 //const search = require('./routes/search');
 
 // Initilize express app
@@ -30,9 +28,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 // Initilize express app to use courses route and search route
 app.use('/courses', courses);
-// app.use('/search', search);
 
-// =============================================================================
+// TODO
+// app.use('/search', search);
 
 // Catch 404 status and forward to error handler
 app.use(function(req, res, next) {
@@ -40,7 +38,6 @@ app.use(function(req, res, next) {
     err.status = 404;
     next(err);
 });
-
 
 // If envionment is in development, will print stacktrace
 if (app.get('env') === 'development') {
