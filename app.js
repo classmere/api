@@ -2,11 +2,9 @@
 
 // Import dependencies
 const express = require('express');
-const path = require('path'); // Where do we use this?
-const favicon = require('serve-favicon');
-const logger = require('morgan'); // Why do we use this?
+const logger = require('morgan');
 const bodyParser = require('body-parser');
-const cors = require('cors'); // Why do we use this?
+const cors = require('cors');
 
 // =============================================================================
 // MOUNT MIDDLEWARE FUNCTIONS
@@ -18,13 +16,11 @@ const courses = require('./routes/courses');
 // Initilize express app
 var app = express();
 
-// Allow cross-origin resource sharing
+// Allow cross-origin resource sharing (cause the JS is blocking HTTP requests) - for Angular app
 app.use(cors());
 
-// Initilize express app to use a favicon.
-// uncomment after placing your favicon in /public
-//app.use(favicon(__dirname + '/public/favicon.ico'));
-app.use(logger('dev')); //What?
+// Logging stuff (dev level)
+app.use(logger('dev'));
 
 // Returns middleware that only parses json
 app.use(bodyParser.json());
