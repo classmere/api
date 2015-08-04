@@ -10,7 +10,9 @@ const PG_URL = process.env.DATABASE_URL;
 const client = new pg.Client(PG_URL);
 
 client.connect(function(err) {
-  if (err) console.error(err);
+  if (err) {
+    console.error(err);
+  }
 
   // GET: list of all courses
   router.get('/', function(req, res, next) {
