@@ -1,13 +1,29 @@
+// courses.js
+
+// Specify strict mode for 'secure' code
 'use_strict';
 
+// Import dependencies and initilize global constants
+
+// Web framework tools
 const express  = require('express');
 const router   = express.Router();
+
+// PostgreSQL client library for Node.js
 const pg       = require('pg').native;
+
+// Library for date formatting
 const moment   = require('moment');
+
+// What does this do?
 const _        = require('underscore');
 
+// PostgreSQL URL and client
 const PG_URL = process.env.DATABASE_URL;
 const client = new pg.Client(PG_URL);
+
+// =============================================================================
+// MIDDLEWARE FOR ALL REQUESTS
 
 client.connect(function(err) {
   if (err) console.error(err);
