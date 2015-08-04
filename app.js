@@ -16,6 +16,7 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
+// Initilize express app to use courses route and search route
 app.use('/courses', courses);
 app.use('/search', search);
 
