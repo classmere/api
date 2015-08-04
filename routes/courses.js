@@ -1,9 +1,4 @@
-// courses.js
-
-// Specify strict mode for 'secure' code
 'use_strict';
-
-// Import dependencies and initilize global constants
 
 // Web framework tools
 const express  = require('express');
@@ -22,8 +17,7 @@ const _        = require('underscore');
 const PG_URL = process.env.DATABASE_URL;
 const client = new pg.Client(PG_URL);
 
-// =============================================================================
-// MIDDLEWARE FOR ALL REQUESTS
+// ----- MIDDLEWARE FOR ALL REQUESTS -----
 
 client.connect(function(err) {
 
