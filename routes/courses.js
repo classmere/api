@@ -15,7 +15,7 @@ const pg       = require('pg').native;
 // Library for date formatting
 const moment   = require('moment');
 
-// What does this do?
+// Library with lots of functions
 const _        = require('underscore');
 
 // PostgreSQL URL and client
