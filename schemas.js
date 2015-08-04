@@ -1,6 +1,6 @@
 // schemas.js
 
-// Import and initilize mongooose
+// Import and initilize mongoose for mongodb
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
