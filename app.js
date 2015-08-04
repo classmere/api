@@ -6,6 +6,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 
 const courses = require('./routes/courses');
+const search  = require('./routes/search');
 
 const app = express();
 
@@ -16,6 +17,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use('/courses', courses);
+app.use('/search', search);
 
 // Catch 404 and forward to error handler
 app.use(function(req, res, next) {

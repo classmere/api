@@ -2,26 +2,38 @@
 
 const express  = require('express');
 const router   = express.Router();
+const pg       = require('pg').native;
+const moment   = require('moment');
 const _        = require('underscore');
-const mongoose = require('mongoose');
-const schemas  = require('../schemas');
 
-mongoose.createConnection(process.env.MONGO_URL);
-const db = mongoose.connection;
-const Course = schemas.Course;
+const PG_URL = process.env.DATABASE_URL;
+const client = new pg.Client(PG_URL);
 
-db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', function(callback) {
+client.connect(function(err) {
+  if (err) {
+    console.error(err);
+  }
 
-  // GET: Search course titles
+  // GET: Search for a course
   router.get('/courses/:q', function(req, res, next) {
-    Course.find({ title: new RegExp(req.params.q, 'i')},
-    function(err, courses) {
-      if (err) {
-        console.error(err);
-      } else {
-        res.json(courses);
-      }
+    const sql = 'SELECT * FROM course ' +
+                'WHERE title LIKE $1 ' +
+                'OR abbr LIKE $2';
+    var q = ('%' + req.params.q + '%').toUpperCase();
+    console.log(q);
+    const query = client.query({
+      text: sql,
+      values: [q, q],
+      name: 'select like',
+    });
+
+    query.on('error', function(err) {
+      console.error(err);
+    });
+
+    query.on('end', function(result) {
+      const data = result.rows;
+      res.json(data);
     });
   });
 });
