@@ -21,46 +21,45 @@ const client = new pg.Client(PG_URL);
 
 client.connect(function(err) {
 
-    // Catch errors
-    if (err) console.error(err);
+  // Catch errors
+  if (err) console.error(err);
 
-    // GET: list of all courses
-    router.get('/', function(req, res, next) {
-        const query = client.query('SELECT title, abbr FROM course');
-        query.on('end', function(result) {
-            const data = result.rows;
-            res.json(data);
-        });
+  // GET: list of all courses
+  router.get('/', function(req, res, next) {
+    const query = client.query('SELECT title, abbr FROM course');
+    query.on('end', function(result) {
+      const data = result.rows;
+      res.json(data);
     });
+  });
 
-    // GET: Lookup a course by abbreviation
-    router.get('/:abbr', function(req, res, next) {
-        const sql = 'SELECT * FROM course ' +
-                    'LEFT JOIN section ' +
-                    'ON course.id = section.course_id ' +
-                    'WHERE course.abbr = $1';
+  // GET: Lookup a course by abbreviation
+  router.get('/:abbr', function(req, res, next) {
+      const sql = 'SELECT * FROM course ' +
+                  'LEFT JOIN section ' +
+                  'ON course.id = section.course_id ' +
+                  'WHERE course.abbr = $1';
 
-        const query = client.query({
-            text: sql,
-            values: [req.params.abbr],
-            name: 'course join section',
-        });
+      const query = client.query({
+        text: sql,
+        values: [req.params.abbr],
+        name: 'course join section',
+      });
 
-        query.on('end', function(result) {
-            const data = result.rows;
+      query.on('end', function(result) {
+          const data = result.rows;
 
-            var jsonResponse = {
-                title: data[0].title,
-                abbr: data[0].abbr,
-                credits: data[0].credits,
-                description: data[0].description,
-                sections: [ ],
-            };
+          var jsonResponse = {
+            title: data[0].title,
+            abbr: data[0].abbr,
+            credits: data[0].credits,
+            description: data[0].description,
+            sections: [ ],
+          };
 
-        // Disabling JSCS so it wont complain about database column names
-        // jscs:disable
+          // Disabling JSCS so it wont complain about database column names
+          // jscs:disable
 
-        // ---------------------------------------------------------------------
         // Make data output prettier
         data.forEach(function(section, index, array) {
 
@@ -105,11 +104,10 @@ client.connect(function(err) {
             };
         });
 
-        // jscs:enable
+          // jscs:enable
 
-        // Send response back as JSON
-        res.json(jsonResponse);
-
+          // Send response back as JSON
+          res.json(jsonResponse);
         });
     });
 });
