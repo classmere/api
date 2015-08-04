@@ -24,17 +24,16 @@ db.on('error', console.error.bind(console, 'connection error:'));
 // Run DB
 db.once('open', function(callback) {
 
-  // GET: Search course titles
-  router.get('/courses/:q', function(req, res, next) {
-    Course.find({ title: new RegExp(req.params.q, 'i')},
-    function(err, courses) {
-      if (err) {
-        console.error(err);
-      } else {
-        res.json(courses);
-      }
+    // GET: Search course titles
+    router.get('/courses/:q', function(req, res, next) {
+        Course.find({ title: new RegExp(req.params.q, 'i')}, function(err, courses) {
+            if (err) {
+                console.error(err);
+            } else {
+                res.json(courses);
+            }
+        });
     });
-  });
 });
 
 // =============================================================================
