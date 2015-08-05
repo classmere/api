@@ -19,6 +19,11 @@ client.connect(function(err) {
   // GET: list of all courses
   router.get('/', function(req, res, next) {
     const query = client.query('SELECT title, abbr FROM course');
+
+    query.on('error', function(err) {
+      next(err);
+    });
+
     query.on('end', function(result) {
       const data = result.rows;
       res.json(data);
@@ -38,65 +43,70 @@ client.connect(function(err) {
       name: 'course join section',
     });
 
+    query.on('error', function(err) {
+      next(err);
+    });
+
     query.on('end', function(result) {
+      const data = result.rows;
 
-      // Error check
-      if (result.rowCount >= 0) {
-        console.log('No results found!');
-      } else {
-        const data = result.rows;
-
-        var jsonResponse = {
-          title: data[0].title,
-          abbr: data[0].abbr,
-          credits: data[0].credits,
-          description: data[0].description,
-          sections: [ ],
-        };
-
-        // Disabling JSCS so it wont complain about database column names
-        // jscs:disable
-        data.forEach(function(section, index, array) {
-          // Make modifications to section data here
-          if (section.days) {
-            const days = section.days
-            .toString()
-            .replace(',', '');
-          }
-          const session = section.session === 'null' ? '' : section.session;
-          const startDate = moment(section.start_date)
-          .format('YYYY-MM-DD');
-          const endDate = moment(section.endDate)
-          .format('YYYY-MM-DD');
-
-          jsonResponse.sections[index] = {
-            term: section.term,
-            startDate: startDate,
-            endDate: endDate,
-            session: session,
-            crn: section.crn,
-            sectionNumber: section.section,
-            credits: section.credits,
-            instructor: section.instructor,
-            days: days,
-            startTime: section.start_time,
-            endTime: section.end_time,
-            location: section.location,
-            campus: section.campus,
-            type: section.type,
-            status: section.status,
-            enrollmentCap: section.cap,
-            enrolled: section.enrolled,
-            waitlisted: section.wl_current,
-            waitlistCap: section.wl_cap,
-            fees: section.fees,
-            restrictions: section.restrictions,
-            comments: section.comments,
-          };
-        });
-        // jscs:enable
-        res.json(jsonResponse);
+      if (data.length === 0) {
+        const err = new Error('Course not found');
+        err.status = 404;
+        next(err);
+        return;
       }
+
+      var jsonResponse = {
+        title: data[0].title,
+        abbr: data[0].abbr,
+        credits: data[0].credits,
+        description: data[0].description,
+        sections: [ ],
+      };
+
+      // Disabling JSCS so it wont complain about database column names
+      // jscs:disable
+      data.forEach(function(section, index, array) {
+        // Make modifications to section data here
+        if (section.days) {
+          const days = section.days
+          .toString()
+          .replace(',', '');
+        }
+        const session = section.session === 'null' ? '' : section.session;
+        const startDate = moment(section.start_date)
+        .format('YYYY-MM-DD');
+        const endDate = moment(section.endDate)
+        .format('YYYY-MM-DD');
+
+        jsonResponse.sections[index] = {
+          term: section.term,
+          startDate: startDate,
+          endDate: endDate,
+          session: session,
+          crn: section.crn,
+          sectionNumber: section.section,
+          credits: section.credits,
+          instructor: section.instructor,
+          days: days,
+          startTime: section.start_time,
+          endTime: section.end_time,
+          location: section.location,
+          campus: section.campus,
+          type: section.type,
+          status: section.status,
+          enrollmentCap: section.cap,
+          enrolled: section.enrolled,
+          waitlisted: section.wl_current,
+          waitlistCap: section.wl_cap,
+          fees: section.fees,
+          restrictions: section.restrictions,
+          comments: section.comments,
+        };
+      });
+      // jscs:enable
+      res.json(jsonResponse);
     });
   });
 });
