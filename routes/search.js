@@ -28,7 +28,7 @@ client.connect(function(err) {
     });
 
     query.on('error', function(err) {
-      console.error(err);
+      next(err);
     });
 
     query.on('end', function(result) {
