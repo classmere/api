@@ -4,7 +4,7 @@ The API server that powers classmere + API reference sheet.
 ## API Reference (In beta)
 ### Courses
 #### List all courses
-**GET** `http://api.classmere.com/v1/courses`
+**GET** `https://classmere.herokuapp.com/courses/`
 Returns a list of all course names and abbreviations in the classmere database.
 ##### Example Response
 ```json
@@ -18,7 +18,7 @@ Returns a list of all course names and abbreviations in the classmere database.
 ```
 
 #### Retrieve a course
-**GET** `http://api.classmere.com/v1/courses/course_abbr`
+**GET** `https://classmere.herokuapp.com/courses/course_abbr`
 Returns all information about a particular course, including information about each of its individual sections.
 Note: "credits" is sometimes a range, e.g. "1-16", therefore it is returned as a string.
 ##### Example Response
@@ -63,7 +63,7 @@ Note: "credits" is sometimes a range, e.g. "1-16", therefore it is returned as a
 ### Search
 Search only works for courses currently. More functionality will be added in the future.
 #### Search for courses
-**GET** `http://api.classmere.com/v1/search/courses`
+**GET** `https://classmere.herokuapp.com/search/courses`
 Returns a list of up to 100 matching courses, not including invividual sections.
 ##### Parameters
 | Name   | Type     | Description           |
