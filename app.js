@@ -17,6 +17,9 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 // Initilize express app to use courses route and search route
+app.use('/', function(req, res) {
+  res.json({'message': 'Welcome to the classmere api.'});
+});
 app.use('/courses', courses);
 app.use('/search', search);
 
@@ -36,22 +39,22 @@ app.use(function(err, req, res, next) {
 // Development error handler
 // will print stacktrace
 if (app.get('env') === 'development') {
-  app.use(function(err, req, res, next) {
+  app.use(function(err, req, res) {
     res.status(err.status || 500)
       .json({
         message: err.message,
-        error: err,
+        error: err
       });
   });
 }
 
 // Production error handler
 // no stacktraces leaked to user
-app.use(function(err, req, res, next) {
+app.use(function(err, req, res) {
   res.status(err.status || 500)
     .json({
       message: err.message,
-      error: {},
+      error: {}
     });
 });
 

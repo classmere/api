@@ -20,5 +20,11 @@
     "pg": "^4.4.1",
     "pg-native": "^1.8.1",
     "underscore": "^1.8.3"
+  },
+  "devDependencies": {
+    "babel-eslint": "^4.0.10",
+    "eslint": "^1.2.1",
+    "eslint-config-airbnb": "0.0.8",
+    "eslint-plugin-react": "^3.2.3"
   }
 }
