@@ -17,7 +17,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 // Initilize express app to use courses route and search route
-app.use('/', function(req, res) {
+app.use('/$', function baseRoute(req, res) {
   res.json({'message': 'Welcome to the classmere api.'});
 });
 app.use('/courses', courses);
