@@ -17,21 +17,23 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 // Initilize express app to use courses route and search route
-app.use('/$', function baseRoute(req, res) {
-  res.json({'message': 'Welcome to the classmere api.'});
-});
 app.use('/courses', courses);
 app.use('/search', search);
 
+// Send welcome message for '/'' endpoint
+app.use('/$', function baseRoute(req, res) {
+  res.json({'message': 'Welcome to the classmere api.'});
+});
+
 // Catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  var err = new Error('Not Found');
+app.use(function handle404(req, res, next) {
+  const err = new Error('Not Found');
   err.status = 404;
   next(err);
 });
 
 // Log errors
-app.use(function(err, req, res, next) {
+app.use(function logErrors(err, req, res, next) {
   console.error(err);
   next(err);
 });
@@ -39,22 +41,22 @@ app.use(function(err, req, res, next) {
 // Development error handler
 // will print stacktrace
 if (app.get('env') === 'development') {
-  app.use(function(err, req, res) {
+  app.use(function devErrorHandler(err, req, res) {
     res.status(err.status || 500)
       .json({
         message: err.message,
-        error: err
+        error: err,
       });
   });
 }
 
 // Production error handler
 // no stacktraces leaked to user
-app.use(function(err, req, res) {
+app.use(function prodErrorHandler(err, req, res) {
   res.status(err.status || 500)
     .json({
       message: err.message,
-      error: {}
+      error: {},
     });
 });
 
