@@ -1,5 +1,11 @@
-const thinky = require('thinky')();
-const type   = thinky.type;
+const thinky = require('thinky')({
+  host: process.env.DATABASE_HOST,
+  port: process.env.DATABASE_PORT,
+  db: process.env.DATABASE_DB,
+  authKey: process.env.DATABASE_KEY,
+  max: 10,
+});
+const type = thinky.type;
 
 const Course = thinky.createModel('Course', {
   id: type.string(),
@@ -44,3 +50,4 @@ Course.ensureIndex('abbr');
 
 exports.Course = Course;
 exports.Section = Section;
+exports.r = thinky.r;

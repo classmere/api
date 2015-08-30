@@ -2,10 +2,9 @@
 
 const express  = require('express');
 const router   = express.Router();
-const thinky   = require('thinky')();
-const r        = thinky.r;
 
 const Course   = require('../schemas/schemas').Course;
+const r        = require('../schemas/schemas').r;
 
 // GET: list of all courses
 router.get('/', function getAllCourses(req, res) {

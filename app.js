@@ -6,7 +6,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 
 const courses = require('./routes/courses');
-const search  = require('./routes/search');
+// const search  = require('./routes/search');
 
 const app = express();
 
@@ -18,7 +18,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 // Initilize express app to use courses route and search route
 app.use('/courses', courses);
-app.use('/search', search);
+// app.use('/search', search);
 
 // Send welcome message for '/'' endpoint
 app.use('/$', function baseRoute(req, res) {
