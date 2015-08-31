@@ -17,6 +17,7 @@
     "express": "~4.12.2",
     "moment": "^2.10.3",
     "morgan": "~1.5.1",
+    "newrelic": "^1.22.0",
     "thinky": "^2.1.6",
     "underscore": "^1.8.3"
   },
