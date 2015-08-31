@@ -19,7 +19,11 @@ router.get('/:abbr', function getCourse(req, res) {
   .getJoin()
   .run()
   .then((result) => {
-    res.json(result);
+    if (result.length === 0) {
+      res.status(404).json({ 'ohsh***': 'course not found' });
+    } else {
+      res.json(result[0]);
+    }
   });
 });
 
