@@ -78,7 +78,8 @@ Returns a list of up to 100 matching courses, not including invividual sections.
 		"credits": "5",
 		"description": "Principles, techniques and recent development in semen collection, 
 		evaluation, extension and preservation; artificial insemination, estrus detection 
-		and synchronization; pregnancy diagnosis and embryo transfer."
+		and synchronization; pregnancy diagnosis and embryo transfer.",
+    "hitScore": 1.4482127
 	},
 	{...}
 ]
