@@ -3,8 +3,8 @@
 const express  = require('express');
 const router   = express.Router();
 
-const Course   = require('../schemas/schemas').Course;
-const r        = require('../schemas/schemas').r;
+const Course   = require('../schemas/Course');
+const r        = require('../schemas/database').r;
 
 // GET: list of all courses
 router.get('/', function getAllCourses(req, res) {
@@ -15,7 +15,10 @@ router.get('/', function getAllCourses(req, res) {
 
 // GET: Lookup a course by abbreviation
 router.get('/:abbr', function getCourse(req, res) {
-  Course.filter(r.row('abbr').eq(req.params.abbr))
+  Course.filter(
+    r.row('abbr')
+    .eq(req.params.abbr)
+  )
   .getJoin()
   .run()
   .then((result) => {

@@ -1,10 +1,4 @@
-const thinky = require('thinky')({
-  host: process.env.DATABASE_HOST,
-  port: process.env.DATABASE_PORT,
-  db: process.env.DATABASE_DB,
-  authKey: process.env.DATABASE_KEY,
-  max: 10,
-});
+const thinky = require('./database');
 const type = thinky.type;
 
 const Course = thinky.createModel('Course', {
@@ -45,9 +39,6 @@ const Section = thinky.createModel('Section', {
 
 Course.hasMany(Section, 'sections', 'id', 'idCourse');
 Section.belongsTo(Course, 'course', 'idCourse', 'id');
-
 Course.ensureIndex('abbr');
 
-exports.Course = Course;
-exports.Section = Section;
-exports.r = thinky.r;
+module.exports = Course;
