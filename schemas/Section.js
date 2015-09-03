@@ -34,4 +34,5 @@ module.exports = Section;
 const Course = require('./Course');
 Section.belongsTo(Course, 'course', 'idCourse', 'id');
 const User = require('./User');
-Section.hasAndBelongsToMany(User, 'users', 'id', 'id');
+Section.hasAndBelongsToMany(User, 'usersTaking', 'id', 'id');
+Section.hasAndBelongsToMany(User, 'usersWithSectionOnWishList', 'id', 'id');

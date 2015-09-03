@@ -25,3 +25,4 @@ module.exports = User;
 
 const Section = require('./Section');
 User.hasAndBelongsToMany(Section, 'sections', 'id', 'id');
+User.hasAndBelongsToMany(Section, 'sectionWishList', 'id', 'id');
