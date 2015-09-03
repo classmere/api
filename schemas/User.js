@@ -12,6 +12,7 @@ const User = thinky.createModel('User', {
   updatedAt: type.date().default(Date.now()),
 });
 
+// Hooks
 User.pre('save', function hashPassword(next) {
   const self = this;
   bcrypt.hash(this.password, 8, (err, hash) => {
@@ -21,3 +22,6 @@ User.pre('save', function hashPassword(next) {
 });
 
 module.exports = User;
+
+const Section = require('./Section');
+User.hasAndBelongsToMany(Section, 'sections', 'id', 'id');
