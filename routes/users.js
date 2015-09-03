@@ -6,6 +6,17 @@ const router   = express.Router();
 const User     = require('../schemas/User');
 
 /**
+ * GET a user.
+ */
+router.get('/:userId', function getUser(req, res, next) {
+  User.get(req.params.userId)
+  .getJoin()
+  .then(function getUserResponse(user) {
+    res.json(user);
+  });
+});
+
+/**
  * POST a new user. Ensures schema is valid before attempting to save
  */
 router.post('/', function postUser(req, res, next) {
