@@ -12,6 +12,17 @@ const User = thinky.createModel('User', {
   updatedAt: type.date().default(Date.now()),
 });
 
+// Methods
+User.defineStatic('getView', function userView() {
+  return this.without('password');
+});
+
+User.define('passwordsMatch', function passwordsMatch(password, callback) {
+  bcrypt.compare(password, this.password, function bcryptComp(err, res) {
+    callback(err, res);
+  });
+});
+
 // Hooks
 User.pre('save', function hashPassword(next) {
   const self = this;
