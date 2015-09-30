@@ -24,36 +24,39 @@ Note: "credits" is sometimes a range, e.g. "1-16", therefore it is returned as a
 ##### Example Response
 ```json
 {
+  "id": "900650b1-e3ce-4ee1-bfac-fdc6079f8abf"
   "title": "Applied Physiology of Reproduction",
-  "abbr": "ANS 327",
-  "credits": "5",
+  "subjectCode": "ANS",
+  "courseNumber": 327
+  "credits": [5],
   "description": "Principles, techniques and recent development in semen collection, 
   evaluation, extension and preservation; artificial insemination, estrus detection 
   and synchronization; pregnancy diagnosis and embryo transfer.",
   "sections": [
     {
-      "term": "Fall 2015",
-      "startDate": "2015-09-24",
-      "endDate": "2015-12-04",
-      "session": null,
-      "crn": 10037,
-      "sectionNumber": 1,
-      "credits": "5",
-      "instructor": "Menino Jr, A.",
-      "days": "TR",
-      "startTime": "08:30:00",
-      "endTime": "09:50:00",
-      "location": "WITH 217",
       "campus": "Corv",
-      "type": "Lecture",
-      "status": "Open",
-      "enrollmentCap": 30,
-      "enrolled": 50,
-      "waitlisted": 3,
-      "waitlistCap": 10,
-      "fees": "$20.00",
-      "restrictions": "Prereqs: (ANS 316 [D-] and ANS 317 [D-] )",
-      "comments": null
+        "capacity": 30,
+        "credits": [5],
+        "crn": 58749,
+        "currentEnrollment": 0,
+        "endDate": "2016-03-28T07:00:00.000Z",
+        "fees": null,
+        "id": "70118b6b-5557-4733-b1de-0ae4bf7b8f08",
+        "idCourse": "900650b1-e3ce-4ee1-bfac-fdc6079f8abf",
+        "meetingTimes": [{
+            "buildingCode": "DEAR",
+            "days": "R",
+            "endTime": "2015-09-23T13:50:00-07:00",
+            "roomNumber": "222",
+            "startTime": "2015-09-23T12:00:00-07:00"
+        }],
+        "restrictions": null,
+        "session": "Full Term",
+        "startDate": "2016-03-28T07:00:00.000Z",
+        "status": "Open",
+        "term": "Sp16",
+        "type": "Laboratory",
+        "waitlistCurrent": 0
     },
     {...}
   ]
