@@ -24,10 +24,10 @@ Note: "credits" is sometimes a range, e.g. "1-16", therefore it is returned as a
 ##### Example Response
 ```json
 {
-  "id": "900650b1-e3ce-4ee1-bfac-fdc6079f8abf"
+  "id": "900650b1-e3ce-4ee1-bfac-fdc6079f8abf",
   "title": "Applied Physiology of Reproduction",
   "subjectCode": "ANS",
-  "courseNumber": 327
+  "courseNumber": 327,
   "credits": [5],
   "description": "Principles, techniques and recent development in semen collection, 
   evaluation, extension and preservation; artificial insemination, estrus detection 
