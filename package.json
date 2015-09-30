@@ -11,14 +11,18 @@
   },
   "dependencies": {
     "async": "^0.9.0",
+    "bcrypt": "^0.8.5",
     "body-parser": "^1.13.2",
     "cors": "^2.6.0",
     "debug": "~2.1.1",
     "elasticsearch": "^8.0.1",
     "express": "~4.12.2",
+    "jsonwebtoken": "^5.0.5",
     "moment": "^2.10.3",
     "morgan": "~1.5.1",
     "newrelic": "^1.22.0",
+    "passport": "^0.3.0",
+    "passport-jwt": "^1.1.1",
     "thinky": "^2.1.6",
     "underscore": "^1.8.3"
   },

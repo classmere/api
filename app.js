@@ -7,18 +7,20 @@ const cors = require('cors');
 
 const courses = require('./routes/courses');
 const search  = require('./routes/search');
+const users   = require('./routes/users');
 
 const app = express();
 
 // Allow cross-origin resource sharing
 app.use(cors());
 app.use(logger('dev'));
-app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 // Initilize express app to use courses route and search route
 app.use('/courses', courses);
 app.use('/search', search);
+app.use('/users', users);
 
 // Send welcome message for '/'' endpoint
 app.use('/$', function baseRoute(req, res) {
