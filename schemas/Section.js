@@ -7,15 +7,17 @@ const Section = thinky.createModel('Section', {
   term: type.string().max(4),
   session: type.string(),
   crn: type.number().integer().max(99999),
-  section: type.number().integer().max(999),
-  credits: [type.number().integer().max(16)],
+  credits: [type.number().integer().max(40)],
   instructor: type.string(),
-  startTime: type.string(),
-  endTime: type.string(),
-  days: type.string().max(7),
+  meetingTimes: [{
+    startTime: type.string(),
+    endTime: type.string(),
+    days: type.string().max(7),
+    buildingCode: type.string(),
+    roomCode: type.string(),
+  }],
   startDate: type.date(),
   endDate: type.date(),
-  location: type.string(),
   campus: type.string(),
   type: type.string(),
   status: type.string(),
@@ -23,9 +25,17 @@ const Section = thinky.createModel('Section', {
   currentEnrollment: type.number().integer(),
   waitlistCapacity: type.number().integer(),
   waitlistCurrent: type.number().integer(),
-  fees: type.string(),
+  fees: [{
+    amount: type.number(),
+    description: type.string(),
+  }],
   restrictions: type.string(),
   comments: type.string(),
+});
+
+// Methods
+Section.defineStatic('getView', function getCourseView() {
+  return this.without(['usersTaking']);
 });
 
 module.exports = Section;
