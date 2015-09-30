@@ -35,28 +35,28 @@ Note: "credits" is sometimes a range, e.g. "1-16", therefore it is returned as a
   "sections": [
     {
       "campus": "Corv",
-        "capacity": 30,
-        "credits": [5],
-        "crn": 58749,
-        "currentEnrollment": 0,
-        "endDate": "2016-03-28T07:00:00.000Z",
-        "fees": null,
-        "id": "70118b6b-5557-4733-b1de-0ae4bf7b8f08",
-        "idCourse": "900650b1-e3ce-4ee1-bfac-fdc6079f8abf",
-        "meetingTimes": [{
-            "buildingCode": "DEAR",
-            "days": "R",
-            "endTime": "2015-09-23T13:50:00-07:00",
-            "roomNumber": "222",
-            "startTime": "2015-09-23T12:00:00-07:00"
-        }],
-        "restrictions": null,
-        "session": "Full Term",
-        "startDate": "2016-03-28T07:00:00.000Z",
-        "status": "Open",
-        "term": "Sp16",
-        "type": "Laboratory",
-        "waitlistCurrent": 0
+      "capacity": 30,
+      "credits": [5],
+      "crn": 58749,
+      "currentEnrollment": 0,
+      "endDate": "2016-03-28T07:00:00.000Z",
+      "fees": null,
+      "id": "70118b6b-5557-4733-b1de-0ae4bf7b8f08",
+      "idCourse": "900650b1-e3ce-4ee1-bfac-fdc6079f8abf",
+      "meetingTimes": [{
+          "buildingCode": "DEAR",
+          "days": "R",
+          "endTime": "2015-09-23T13:50:00-07:00",
+          "roomNumber": "222",
+          "startTime": "2015-09-23T12:00:00-07:00"
+      }],
+      "restrictions": null,
+      "session": "Full Term",
+      "startDate": "2016-03-28T07:00:00.000Z",
+      "status": "Open",
+      "term": "Sp16",
+      "type": "Laboratory",
+      "waitlistCurrent": 0
     },
     {...}
   ]
