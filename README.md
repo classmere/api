@@ -18,9 +18,9 @@ Returns a list of all course names and abbreviations in the classmere database.
 ```
 
 #### Retrieve a course
-**GET** `https://classmere.herokuapp.com/courses/course_abbr`
+**GET** `https://classmere.herokuapp.com/courses/subject_code/course_number`
 Returns all information about a particular course, including information about each of its individual sections.
-Note: "credits" is sometimes a range, e.g. "1-16", therefore it is returned as a string.
+Note: "credits" is sometimes a range, e.g. "1-16", therefore it is returned as an integer array.
 ##### Example Response
 ```json
 {
@@ -34,29 +34,29 @@ Note: "credits" is sometimes a range, e.g. "1-16", therefore it is returned as a
   and synchronization; pregnancy diagnosis and embryo transfer.",
   "sections": [
     {
-      "campus": "Corv",
-      "capacity": 30,
-      "credits": [5],
-      "crn": 58749,
-      "currentEnrollment": 0,
-      "endDate": "2016-03-28T07:00:00.000Z",
-      "fees": null,
-      "id": "70118b6b-5557-4733-b1de-0ae4bf7b8f08",
-      "idCourse": "900650b1-e3ce-4ee1-bfac-fdc6079f8abf",
-      "meetingTimes": [{
-          "buildingCode": "DEAR",
-          "days": "R",
-          "endTime": "2015-09-23T13:50:00-07:00",
-          "roomNumber": "222",
-          "startTime": "2015-09-23T12:00:00-07:00"
-      }],
-      "restrictions": null,
-      "session": "Full Term",
-      "startDate": "2016-03-28T07:00:00.000Z",
-      "status": "Open",
-      "term": "Sp16",
-      "type": "Laboratory",
-      "waitlistCurrent": 0
+      "id": "5cef6194-3f1c-4b8b-a297-6bfd5330f335",
+        "term": "F15",
+        "session": "Full Term",
+        "crn": 20865,
+        "credits": [4],
+        "meetingTimes": [{
+            "buildingCode": "DEAR",
+            "days": "T",
+            "endTime": "2015-09-23T17:50:00-07:00",
+            "roomNumber": "222",
+            "startTime": "2015-09-23T16:00:00-07:00"
+        }],
+        "startDate": "2015-09-24T07:00:00.000Z",
+        "endDate": "2015-09-24T07:00:00.000Z",
+        "campus": "Corv",
+        "type": "Laboratory",
+        "status": "Open",
+        "capacity": 30,
+        "currentEnrollment": 25,
+        "waitlistCurrent": 0,
+        "fees": null,
+        "restrictions": null,
+        "comments": "Wireless laptop required."
     },
     {...}
   ]
