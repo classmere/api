@@ -1,0 +1,4 @@
+node_modules
+*.md
+.dockerignore
+!LICENSE.md
