@@ -1,7 +1,7 @@
 module.exports = require('thinky')({
-  host: process.env.DATABASE_HOST,
-  port: process.env.DATABASE_PORT,
-  db: process.env.DATABASE_DB,
-  authKey: process.env.DATABASE_KEY,
+  host: process.env.RETHINKDB_PORT_28015_TCP_ADDR,
+  port: process.env.RETHINKDB_PORT_28015_TCP_PORT,
+  db: '',
+  authKey: '',
   max: 10,
 });
