@@ -8,7 +8,7 @@ const cors = require('cors');
 const courses   = require('./routes/courses');
 const search    = require('./routes/search');
 const users     = require('./routes/users');
-const buildings = require('.routes/buildings');
+const buildings = require('./routes/buildings');
 
 const app = express();
 

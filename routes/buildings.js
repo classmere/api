@@ -5,13 +5,14 @@ const router   = express.Router();
 
 const Building = require('../schemas/Building');
 
-// GET: list of all courses
+// GET: list of all buildings
 router.get('/', function getAllBuildings(req, res) {
   Building.then((result) => {
     res.json(result);
   });
 });
 
+// GET: a building
 router.get('/:abbr', function getAllBuildings(req, res) {
   Building.filter({
   	abbr: req.params.abbr,
@@ -19,7 +20,7 @@ router.get('/:abbr', function getAllBuildings(req, res) {
   .run()
   .then((result) => {
   	if (result.length === 0) {
-      res.status(404).json({ 'ohsh***': 'course not found' });
+      res.status(404).json({ 'ohsh***': 'building not found' });
     } else {
     	const b = result[0];
     	res.json({
@@ -32,3 +33,5 @@ router.get('/:abbr', function getAllBuildings(req, res) {
 	}
   })
 });
+
+module.exports = router;

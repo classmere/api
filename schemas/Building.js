@@ -6,8 +6,8 @@ const Building = thinky.createModel('Building', {
   abbr: type.string(),
   name: type.string(),
   address: type.string(),
-  buildingNumber: type.integer(),
-  sqft: type.integer(),
+  buildingNumber: type.number().integer(),
+  sqft: type.number().integer(),
 });
 
 // Indexes
