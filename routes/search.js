@@ -11,7 +11,7 @@ const client = new elasticsearch.Client({
 // GET: Search for a course
 router.get('/courses/:q', function searchCourse(req, res) {
   client.search({
-    index: 'classmere',
+    index: 'test',
     type: 'Course',
     body: {
       query: {
@@ -31,7 +31,8 @@ router.get('/courses/:q', function searchCourse(req, res) {
         const course = hit._source;
         return {
           title: course.title,
-          abbr: course.abbr,
+          subjectCode: course.subjectCode,
+          courseNumber: course.courseNumber,
           credits: course.credits,
           description: course.description,
           hitScore: hit._score,
