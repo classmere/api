@@ -70,6 +70,11 @@ Returns info on the selected building
 ##### Example Response
 ```json
 {
+	"abbr": "KEC",
+	"name": "KELLEY ENGINEERING CENTER",
+	"address": "110 SW PARK TERRACE; CORVALLIS, OR 97331",
+	"buildingNumber": "3",
+	"sqft": "134009"
 }
 ```
 
