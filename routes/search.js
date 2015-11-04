@@ -15,8 +15,14 @@ router.get('/courses/:q', function searchCourse(req, res) {
     type: 'Course',
     body: {
       query: {
-        match: {
-          description: req.params.q,
+        multi_match: {
+          query: req.params.q,
+          fields: [
+            'abbr^5',
+            'title^4',
+            'subjectCode^5',
+            'description^3',
+          ],
         },
       },
     },
@@ -38,7 +44,6 @@ router.get('/courses/:q', function searchCourse(req, res) {
           hitScore: hit._score,
         };
       });
-
       res.json(classmereResponse);
     }
   });
