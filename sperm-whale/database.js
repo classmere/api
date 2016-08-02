@@ -10,7 +10,7 @@ MongoClient.connect(url, function(err, db) {
 
   // Courses
   module.exports.getAllCourses = function(cb) {
-    courses.find({}, (err, r) => returnRes(err, r, cb));
+    courses.find({}).toArray((err, r) => returnRes(err, r, cb));
   };
 
   module.exports.getCourse = function(subjectCode, courseNumber, cb) {
@@ -23,7 +23,7 @@ MongoClient.connect(url, function(err, db) {
 
   // Buildings
   module.exports.getAllBuildings = function(cb) {
-    buildings.find({}, (err, r) => returnRes(err, r, cb));
+    buildings.find({}).toArray((err, r) => returnRes(err, r, cb));
   };
 
   module.exports.getBuilding = function(buildingCode, cb) {
