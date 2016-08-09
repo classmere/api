@@ -8,8 +8,6 @@ MongoClient.connect(url, function(err, db) {
   const buildings = db.collection('buildings');
 
   // Create fresh search indexes
-  courses.dropIndexes();
-  buildings.dropIndexes();
   courses.ensureIndex({ title : 'text' });
   buildings.ensureIndex({ name : 'text' });
 
