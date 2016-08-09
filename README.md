@@ -1,4 +1,4 @@
-# Classmere-api [![Build Status](https://travis-ci.org/classmere/api.svg?branch=master)](https://travis-ci.org/classmere/api)
+# api [![Build Status](https://travis-ci.org/classmere/api.svg?branch=master)](https://travis-ci.org/classmere/api)
 The API server that powers classmere + API reference sheet.
 
 ## API Reference (beta)
