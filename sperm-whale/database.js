@@ -7,7 +7,9 @@ MongoClient.connect(url, function(err, db) {
   const courses = db.collection('courses');
   const buildings = db.collection('buildings');
 
-  // Create search indexes
+  // Create fresh search indexes
+  courses.dropIndexes();
+  buildings.dropIndexes();
   courses.ensureIndex({ title : 'text' });
   buildings.ensureIndex({ name : 'text' });
 
