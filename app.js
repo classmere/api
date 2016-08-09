@@ -7,6 +7,7 @@ const cors = require('cors');
 
 const courses   = require('./routes/courses');
 const buildings = require('./routes/buildings');
+const search    = require('./routes/search');
 
 const app = express();
 
@@ -19,6 +20,7 @@ app.use(bodyParser.json());
 // Initilize express app to use courses route and search route
 app.use('/courses', courses);
 app.use('/buildings', buildings);
+app.use('/search', search);
 
 // Send welcome message for '/'' endpoint
 app.use('/$', function baseRoute(req, res) {

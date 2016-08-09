@@ -1,4 +1,4 @@
-# Classmere-api
+# Classmere-api [![Build Status](https://travis-ci.org/classmere/api.svg?branch=master)](https://travis-ci.org/classmere/api)
 The API server that powers classmere + API reference sheet.
 
 ## API Reference (beta)
@@ -95,7 +95,6 @@ GET /buildings/KEC
 ```
 
 ### Search
-Search only works for courses currently. More functionality will be added in the future.
 #### Search for courses
 **GET** `/search/courses/<keyword>`
 Returns a list of up to 100 matching courses, not including individual sections.
@@ -118,5 +117,29 @@ GET /search/courses/nutrition
 		"hitScore": 3.1342711
 	},
 	{...}
+]
+```
+
+#### Search for buildings
+**GET** `/search/buildings/<keyword>`
+Returns a list of up to 100 matching buildings.
+
+##### Example
+```
+GET /search/buildings/Kelley
+```
+##### Response
+```json
+[
+	{
+		"_id": "57a52128797428f65db5d43c",
+		"abbr": "KEC",
+		"address": "110 SW PARK TERRACE; CORVALLIS, OR 97331",
+		"buildingNumber": "3",
+		"id": "ac6eceba-38f7-41d0-91d6-65175e7b83b5",
+		"name": "KELLEY ENGINEERING CENTER",
+		"sqft": "134009",
+		"score": 0.6666666666666666
+	}
 ]
 ```
