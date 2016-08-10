@@ -17,9 +17,8 @@ MongoClient.connect(url, function(err, db) {
   };
 
   module.exports.getCourse = function(subjectCode, courseNumber, cb) {
-    const abbr = `${subjectCode} ${courseNumber}`;
     courses.findOne(
-      {abbr: abbr}, 
+      {subjectCode: subjectCode, courseNumber: courseNumber},
       (err, r) => returnRes(err, r, cb)
     );
   };
