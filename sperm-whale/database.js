@@ -1,6 +1,6 @@
 const MongoClient = require('mongodb').MongoClient;
 
-const url = 'mongodb://db:27017/test';
+const url = process.env.MONGO_URL || 'mongodb://localhost:27017/test';
 
 MongoClient.connect(url, function(err, db) {
   console.log(`Connected to MongoDB @${url}`);

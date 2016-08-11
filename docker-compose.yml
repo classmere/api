@@ -5,9 +5,19 @@ services:
   web:
     build: .
     command: npm start
+    environment:
+      - PORT=5000
+      - MONGO_URL=mongodb://db:27017/test
     volumes:
-      - .:/classmere
+      - .:/classmere_api
     ports:
       - "5000:5000"
+    depends_on:
+      - db
+  scraper:
+    image: rutgerfarry/scraper
+    command: npm start
+    environment:
+      - MONGO_URL=mongodb://db:27017/test
     depends_on:
       - db

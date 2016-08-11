@@ -1,5 +1,6 @@
 FROM node:6.3
-RUN mkdir /classmere
-WORKDIR /classmere
-ADD . /classmere/
+ENV name /classmere_api
+RUN mkdir $name
+WORKDIR $name
+ADD . $name/
 RUN npm install
