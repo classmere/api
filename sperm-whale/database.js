@@ -1,6 +1,6 @@
 const MongoClient = require('mongodb').MongoClient;
 
-const url = 'mongodb://localhost:27017/test';
+const url = 'mongodb://db:27017/test';
 
 MongoClient.connect(url, function(err, db) {
   console.log(`Connected to MongoDB @${url}`);
@@ -17,9 +17,8 @@ MongoClient.connect(url, function(err, db) {
   };
 
   module.exports.getCourse = function(subjectCode, courseNumber, cb) {
-    const abbr = `${subjectCode} ${courseNumber}`;
     courses.findOne(
-      {abbr: abbr}, 
+      {subjectCode: subjectCode, courseNumber: courseNumber},
       (err, r) => returnRes(err, r, cb)
     );
   };
