@@ -1,0 +1,21 @@
+version: '2'
+services:
+  db:
+    image: mongo
+  web:
+    image: rutgerfarry/api
+    command: npm start
+    environment:
+      - PORT=80
+      - MONGO_URL=mongodb://db:27017/test
+    ports:
+      - "80:80"
+    depends_on:
+      - db
+  scraper:
+    image: rutgerfarry/scraper
+    command: npm start
+    environment:
+      - MONGO_URL=mongodb://db:27017/test
+    depends_on:
+      - db
