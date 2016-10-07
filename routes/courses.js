@@ -14,7 +14,7 @@ router.get('/', function getAllCourses(req, res) {
 
 // GET: Lookup a course by abbreviation
 router.get('/:subject/:number', function getCourse(req, res) {
-  database.getCourse(req.params.subject, req.params.number, function(err, r) {
+  database.getCourse(req.params.subject, parseInt(req.params.number), function(err, r) {
     res.json(r);
   });
 });
