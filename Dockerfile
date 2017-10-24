@@ -1,6 +1,11 @@
-FROM node:6.3
-ENV name /classmere_api
-RUN mkdir $name
-WORKDIR $name
-ADD . $name/
-RUN npm install
+# Build stage
+FROM node:8
+
+WORKDIR /usr/src
+
+COPY package.json yarn.lock ./
+RUN yarn install
+
+COPY . .
+
+CMD ["yarn", "start"]

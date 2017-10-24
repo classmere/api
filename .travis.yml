@@ -1,11 +1,9 @@
-sudo: required
-
 language: node_js
 node_js:
-  - "6.2.2"
+  - "8"
 
 services:
   - docker
 
 before_install:
-  - docker-compose up web
+  - docker-compose build
