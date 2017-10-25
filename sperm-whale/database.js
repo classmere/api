@@ -3,6 +3,10 @@ const MongoClient = require('mongodb').MongoClient;
 const url = process.env.MONGO_URL || 'mongodb://localhost:27017/test';
 
 MongoClient.connect(url, function(err, db) {
+  if (err) {
+    throw err;
+  }
+
   console.log(`Connected to MongoDB @${url}`);
   const courses = db.collection('courses');
   const buildings = db.collection('buildings');
