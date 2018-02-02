@@ -88,13 +88,13 @@ GET /buildings/KEC
 ##### Response
 ```json
 {
-    "_id": "5a6aa76806fd1100126ca971",
+    "_id": "5a74c25b7f06d80010525648",
     "abbr": "KEC",
     "name": "Kelley Engineering Center",
     "address": "110 SW Park Terrace",
-    "buildingNumber": "0003",
-    "latitude": "44.567164",
-    "longitude": "-123.278692"
+    "buildingNumber": 3,
+    "latitude": 44.567164,
+    "longitude": -123.278692
 }
 ```
 
@@ -185,13 +185,13 @@ GET /search/buildings/Kelley
 ```json
 [
     {
-        "_id": "5a6aa76806fd1100126ca971",
+        "_id": "5a74c25b7f06d80010525648",
         "abbr": "KEC",
         "name": "Kelley Engineering Center",
         "address": "110 SW Park Terrace",
-        "buildingNumber": "0003",
-        "latitude": "44.567164",
-        "longitude": "-123.278692",
+        "buildingNumber": 3,
+        "latitude": 44.567164,
+        "longitude": -123.278692,
         "score": 0.6666666666666666
     }
 ]
