@@ -1,22 +1,24 @@
-'use_strict';
+'use_strict'
 
-const express = require('express');
-const router = express.Router();
+const express = require('express')
+const router = express.Router()
 
-const database = require('../sperm-whale/database');
+const database = require('../database-adapter/mongo')
 
-// GET: Search course by name 
-router.get('/courses/:query', function search(req, res) {
-  database.searchCourse(req.params.query, function(err, r) {
-    res.json(r);
-  });
-});
+// GET: Search course by name
+router.get('/courses/:query', function search (req, res, next) {
+  database.searchCourse(req.params.query, function (err, r) {
+    if (err) { next(err) }
+    res.json(r)
+  })
+})
 
-// GET: Search building by name 
-router.get('/buildings/:query', function search(req, res) {
-  database.searchBuilding(req.params.query, function(err, r) {
-    res.json(r);
-  });
-});
+// GET: Search building by name
+router.get('/buildings/:query', function search (req, res, next) {
+  database.searchBuilding(req.params.query, function (err, r) {
+    if (err) { next(err) }
+    res.json(r)
+  })
+})
 
-module.exports = router;
+module.exports = router
