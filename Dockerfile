@@ -3,9 +3,11 @@ FROM node:8
 
 WORKDIR /usr/src
 
-COPY package.json yarn.lock ./
-RUN yarn install
+COPY package*.json ./
+
+RUN npm install
 
 COPY . .
 
-CMD ["yarn", "start"]
+EXPOSE 5000
+CMD ["npm", "start"]
