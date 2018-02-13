@@ -29,6 +29,19 @@ describe('/courses endpoint', () => {
   })
 })
 
+describe('/subjects endpoint', () => {
+  test('/subjects succeeds', async () => {
+    const response = await request(app).get('/subjects')
+    expect(response.type).toBe('application/json')
+    expect(response.statusCode).toBe(200)
+  })
+
+  test('/courses returns an Array', async () => {
+    const response = await request(app).get('/subjects')
+    expect(Array.isArray(response.body)).toBeTruthy()
+  })
+})
+
 function twoSeconds () {
   return new Promise(resolve => {
     setTimeout(() => {

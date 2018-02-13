@@ -9,6 +9,7 @@ const compression = require('compression')
 const courses = require('./routes/courses')
 const buildings = require('./routes/buildings')
 const search = require('./routes/search')
+const subjects = require('./routes/subjects')
 
 const app = express()
 
@@ -23,6 +24,7 @@ app.use(bodyParser.json())
 app.use('/courses', courses)
 app.use('/buildings', buildings)
 app.use('/search', search)
+app.use('/subjects', subjects)
 
 // Send welcome message for '/'' endpoint
 app.use('/$', function baseRoute (req, res) {

@@ -55,16 +55,10 @@ MongoClient.connect(url, function (err, db) {
       }, callback)
   }
 
-  module.exports.searchCourse = function (query, callback) {
+  // Subjects
+  module.exports.getAllSubjects = function (callback) {
     courses
-      .find({
-        $text: { $search: query }
-      }, {
-        score: { $meta: 'textScore' }
-      })
-      .sort({ score: { $meta: 'textScore' } })
-      .limit(100)
-      .toArray(callback)
+      .distinct('subjectCode', callback)
   }
 
   // Buildings
@@ -79,6 +73,19 @@ MongoClient.connect(url, function (err, db) {
       .findOne({
         abbr: buildingCode
       }, callback)
+  }
+
+  // Search
+  module.exports.searchCourse = function (query, callback) {
+    courses
+      .find({
+        $text: { $search: query }
+      }, {
+        score: { $meta: 'textScore' }
+      })
+      .sort({ score: { $meta: 'textScore' } })
+      .limit(100)
+      .toArray(callback)
   }
 
   module.exports.searchBuilding = function (query, callback) {
