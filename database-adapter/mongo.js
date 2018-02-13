@@ -33,6 +33,20 @@ MongoClient.connect(url, function (err, db) {
       .toArray(callback)
   }
 
+  module.exports.getCoursesInSubject = function (subjectCode, callback) {
+    courses
+      .find({
+        subjectCode: subjectCode
+      })
+      .project({
+        title: 1,
+        subjectCode: 1,
+        courseNumber: 1,
+        _id: 0
+      })
+      .toArray(callback)
+  }
+
   module.exports.getCourse = function (subjectCode, courseNumber, callback) {
     courses
       .findOne({
