@@ -24,7 +24,6 @@ describe('courses endpoint', () => {
 
   test('/courses returns an Array', async () => {
     const response = await request(app).get('/courses')
-    console.log(response)
     expect(Array.isArray(response.body)).toBeTruthy()
   })
 })
