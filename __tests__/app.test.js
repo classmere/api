@@ -1,15 +1,16 @@
 /* eslint-env jest */
 
-const { exec } = require('child_process')
+const util = require('util')
+const exec = util.promisify(require('child_process').exec)
 const request = require('supertest')
 let app
 
 // start a mongo instance loaded with test data using docker
 beforeAll(async () => {
   await exec('docker run --name scraper_test_db -d --rm -p 27017:27017 mongo')
-  await exec('docker cp dump/ scraper_test_db:/dump')
+  await exec('docker cp __tests__/dump/ scraper_test_db:/dump')
   await exec('docker exec scraper_test_db mongorestore /dump')
-  app = await require('../app')
+  app = require('../app')
   await twoSeconds()
 })
 
