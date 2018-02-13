@@ -34,32 +34,15 @@ app.use(function handle404 (req, res, next) {
   next(err)
 })
 
-// Log errors
-app.use(function logErrors (err, req, res, next) {
-  console.error(err)
-  next(err)
-})
+// error handler
+app.use(function (err, req, res, next) {
+  // set locals, only providing error in development
+  res.message = err.message
+  res.error = req.app.get('env') === 'development' ? err : {}
 
-// Development error handler
-// will print stacktrace
-if (app.get('env') === 'development') {
-  app.use(function devErrorHandler (err, req, res) {
-    res.status(err.status || 500)
-      .json({
-        message: err.message,
-        error: err
-      })
-  })
-}
-
-// Production error handler
-// no stacktraces leaked to user
-app.use(function prodErrorHandler (err, req, res) {
+  // render an error in json
   res.status(err.status || 500)
-    .json({
-      message: err.message,
-      error: {}
-    })
+  res.json()
 })
 
 module.exports = app
