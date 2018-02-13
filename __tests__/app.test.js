@@ -16,7 +16,7 @@ beforeAll(async () => {
 
 afterAll(done => exec('docker kill scraper_test_db', done))
 
-describe('courses endpoint', () => {
+describe('/courses endpoint', () => {
   test('/courses succeeds', async () => {
     const response = await request(app).get('/courses')
     expect(response.type).toBe('application/json')
