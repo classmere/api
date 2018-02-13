@@ -4,6 +4,7 @@ const express = require('express')
 const logger = require('morgan')
 const bodyParser = require('body-parser')
 const cors = require('cors')
+const compression = require('compression')
 
 const courses = require('./routes/courses')
 const buildings = require('./routes/buildings')
@@ -13,6 +14,7 @@ const app = express()
 
 // Allow cross-origin resource sharing
 app.use(cors())
+app.use(compression())
 app.use(logger('dev'))
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
