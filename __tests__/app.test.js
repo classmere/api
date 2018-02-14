@@ -1,20 +1,29 @@
 /* eslint-env jest */
 
-const util = require('util')
-const exec = util.promisify(require('child_process').exec)
+const fs = require('fs')
 const request = require('supertest')
-let app
+const MongoClient = require('mongodb').MongoClient
+const app = require('../app')
 
-// start a mongo instance loaded with test data using docker
+/// Clears the test database and loads sample data for testing, assuming there
+/// is a MongoDB instance running at localhost or MONGO_URL.
+/// If you don't have MongoDB installed, this requirement can be done with docker:
+/// $ docker run --rm -d -p 27017:27017 mongo
 beforeAll(async () => {
-  await exec('docker run --name scraper_test_db -d --rm -p 27017:27017 mongo')
-  await exec('docker cp __tests__/dump/ scraper_test_db:/dump')
-  await exec('docker exec scraper_test_db mongorestore /dump')
-  app = require('../app')
-  await twoSeconds()
-})
+  const url = process.env.MONGO_URL || 'mongodb://localhost:27017/test'
+  const client = await MongoClient.connect(url)
+  const db = client.db('test')
 
-afterAll(done => exec('docker kill scraper_test_db', done))
+  for (const document of ['buildings']) {
+    const jsonFile = fs.readFileSync(`./__tests__/newdump/${document}.json`)
+    const jsonDocuments = JSON.parse(jsonFile)
+                              .map(d => ({...d, _id: d._id.$oid}))
+    await db.collection(document).deleteMany({})
+    await db.collection(document).insertMany(jsonDocuments)
+  }
+
+  await client.close()
+})
 
 describe('/courses endpoint', () => {
   test('/courses succeeds', async () => {
@@ -41,11 +50,3 @@ describe('/subjects endpoint', () => {
     expect(Array.isArray(response.body)).toBeTruthy()
   })
 })
-
-function twoSeconds () {
-  return new Promise(resolve => {
-    setTimeout(() => {
-      resolve()
-    }, 2000)
-  })
-}
