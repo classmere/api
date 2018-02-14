@@ -52,6 +52,10 @@ MongoClient.connect(url, function (err, db) {
       .findOne({
         subjectCode: subjectCode,
         courseNumber: courseNumber
+      }, {
+        _id: 0,
+        _version: 0,
+        prereqs: 0
       }, callback)
   }
 
@@ -65,6 +69,7 @@ MongoClient.connect(url, function (err, db) {
   module.exports.getAllBuildings = function (callback) {
     buildings
       .find({})
+      .project({ _id: 0 })
       .toArray((callback))
   }
 
@@ -81,17 +86,25 @@ MongoClient.connect(url, function (err, db) {
       .find({
         $text: { $search: query }
       }, {
+        _id: 0,
+        _version: 0,
+        prereqs: 0
+      }, {
         score: { $meta: 'textScore' }
       })
       .sort({ score: { $meta: 'textScore' } })
       .limit(100)
-      .toArray(callback)
+      .toArray((callback))
   }
 
   module.exports.searchBuilding = function (query, callback) {
     buildings
       .find({
         $text: { $search: query }
+      }, {
+        _id: 0,
+        _version: 0,
+        prereqs: 0
       }, {
         score: { $meta: 'textScore' }
       })
