@@ -3,4 +3,4 @@ language: node_js
 services:
   - docker
 script:
-  - docker-compose api npm test
+  - docker-compose run api npm test
