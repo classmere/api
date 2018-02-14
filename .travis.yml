@@ -1,6 +1,2 @@
-sudo: required
 language: node_js
-services:
-  - docker
-script:
-  - docker-compose run api npm test
+services: mongodb
