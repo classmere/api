@@ -1,13 +1,13 @@
 {
-  "name": "web",
+  "name": "api",
   "version": "0.0.3",
   "description": "The API server that powers classmere",
   "author": "Rutger Farry <rutgerfarry@gmail.com>",
   "scripts": {
     "start": "node ./bin/www",
-    "test": "echo \"Error: no test specified\" && exit 0"
+    "test": "standard && jest --forceExit"
   },
-  "homepage": "http://classmere.com",
+  "homepage": "http://api.classmere.com",
   "repository": {
     "type": "git",
     "url": "https://github.com/classmere/api"
@@ -17,17 +17,19 @@
   },
   "dependencies": {
     "body-parser": "*",
-    "cors": "^2.7.1",
-    "debug": "^2.2.0",
-    "express": "^4.14.0",
-    "moment": "^2.14.1",
-    "mongodb": "^2.2.5",
-    "morgan": "^1.7.0",
-    "newrelic": "^1.28.3",
-    "serve-favicon": "^2.3.0"
+    "compression": "^1.7.1",
+    "cors": "^2.7",
+    "debug": "^2.2",
+    "express": "^4.16",
+    "moment": "^2.14",
+    "mongodb": "^2.2",
+    "morgan": "^1.9",
+    "newrelic": "^1.28"
   },
   "devDependencies": {
-    "standard": "^10.0.3"
+    "jest": "^22.2",
+    "standard": "^10.0",
+    "supertest": "^3.0"
   },
   "private": true,
   "license": "Apache-2.0"

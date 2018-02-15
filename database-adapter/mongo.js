@@ -17,51 +17,95 @@ MongoClient.connect(url, function (err, db) {
 
   // Create fresh search indexes
   courses.ensureIndex({ title: 'text' })
+  courses.ensureIndex({ subjectCode: 1, courseNumber: 1 })
   buildings.ensureIndex({ name: 'text' })
 
   // Courses
-  module.exports.getAllCourses = function (cb) {
-    courses.find({}).toArray((err, r) => returnRes(err, r, cb))
+  module.exports.getAllCourses = function (callback) {
+    courses
+      .find({})
+      .project({
+        title: 1,
+        subjectCode: 1,
+        courseNumber: 1,
+        _id: 0
+      })
+      .toArray(callback)
   }
 
-  module.exports.getCourse = function (subjectCode, courseNumber, cb) {
-    courses.findOne(
-      {subjectCode: subjectCode, courseNumber: courseNumber},
-      (err, r) => returnRes(err, r, cb)
-    )
+  module.exports.getCoursesInSubject = function (subjectCode, callback) {
+    courses
+      .find({
+        subjectCode: subjectCode
+      })
+      .project({
+        title: 1,
+        subjectCode: 1,
+        courseNumber: 1,
+        _id: 0
+      })
+      .toArray(callback)
   }
 
-  module.exports.searchCourse = function (query, cb) {
-    courses.find(
-      { $text: { $search: query } },
-      { score: { $meta: 'textScore' } }
-    ).sort({ score: { $meta: 'textScore' } }).limit(100).toArray((err, r) => returnRes(err, r, cb))
+  module.exports.getCourse = function (subjectCode, courseNumber, callback) {
+    courses
+      .findOne({
+        subjectCode: subjectCode,
+        courseNumber: courseNumber
+      }, {
+        _id: 0,
+        _version: 0,
+        prereqs: 0
+      }, callback)
+  }
+
+  // Subjects
+  module.exports.getAllSubjects = function (callback) {
+    courses
+      .distinct('subjectCode', callback)
   }
 
   // Buildings
-  module.exports.getAllBuildings = function (cb) {
-    buildings.find({}).toArray((err, r) => returnRes(err, r, cb))
+  module.exports.getAllBuildings = function (callback) {
+    buildings
+      .find({})
+      .project({ _id: 0 })
+      .toArray((callback))
   }
 
-  module.exports.getBuilding = function (buildingCode, cb) {
-    buildings.findOne(
-      {abbr: buildingCode},
-      (err, r) => returnRes(err, r, cb)
-    )
+  module.exports.getBuilding = function (buildingCode, callback) {
+    buildings
+      .findOne({
+        abbr: buildingCode
+      }, callback)
   }
 
-  module.exports.searchBuilding = function (query, cb) {
-    buildings.find(
-      { $text: { $search: query } },
-      { score: { $meta: 'textScore' } }
-    ).sort({ score: { $meta: 'textScore' } }).limit(100).toArray((err, r) => returnRes(err, r, cb))
+  // Search
+  module.exports.searchCourse = function (query, callback) {
+    courses
+      .find({
+        $text: { $search: query }
+      }, {
+        score: { $meta: 'textScore' },
+        _id: 0,
+        _version: 0,
+        prereqs: 0
+      })
+      .sort({ score: { $meta: 'textScore' } })
+      .limit(100)
+      .toArray((callback))
   }
 
-  function returnRes (err, r, cb) {
-    if (err) {
-      cb(err)
-    } else {
-      cb(null, r)
-    }
+  module.exports.searchBuilding = function (query, callback) {
+    buildings
+      .find({
+        $text: { $search: query }
+      }, {
+        score: { $meta: 'textScore' },
+        _id: 0
+      })
+      .sort({ score: { $meta: 'textScore' } })
+      .limit(100)
+      .toArray((callback))
   }
 })

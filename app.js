@@ -4,15 +4,18 @@ const express = require('express')
 const logger = require('morgan')
 const bodyParser = require('body-parser')
 const cors = require('cors')
+const compression = require('compression')
 
 const courses = require('./routes/courses')
 const buildings = require('./routes/buildings')
 const search = require('./routes/search')
+const subjects = require('./routes/subjects')
 
 const app = express()
 
 // Allow cross-origin resource sharing
 app.use(cors())
+app.use(compression())
 app.use(logger('dev'))
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
@@ -21,6 +24,7 @@ app.use(bodyParser.json())
 app.use('/courses', courses)
 app.use('/buildings', buildings)
 app.use('/search', search)
+app.use('/subjects', subjects)
 
 // Send welcome message for '/'' endpoint
 app.use('/$', function baseRoute (req, res) {
@@ -34,32 +38,15 @@ app.use(function handle404 (req, res, next) {
   next(err)
 })
 
-// Log errors
-app.use(function logErrors (err, req, res, next) {
-  console.error(err)
-  next(err)
-})
+// error handler
+app.use(function (err, req, res, next) {
+  // set locals, only providing error in development
+  res.message = err.message
+  res.error = req.app.get('env') === 'development' ? err : {}
 
-// Development error handler
-// will print stacktrace
-if (app.get('env') === 'development') {
-  app.use(function devErrorHandler (err, req, res) {
-    res.status(err.status || 500)
-      .json({
-        message: err.message,
-        error: err
-      })
-  })
-}
-
-// Production error handler
-// no stacktraces leaked to user
-app.use(function prodErrorHandler (err, req, res) {
+  // render an error in json
   res.status(err.status || 500)
-    .json({
-      message: err.message,
-      error: {}
-    })
+  res.json()
 })
 
 module.exports = app

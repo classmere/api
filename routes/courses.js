@@ -13,6 +13,14 @@ router.get('/', function getAllCourses (req, res, next) {
   })
 })
 
+// GET: Lookup all courses in a given discipline
+router.get('/:subject', function getCoursesInSubject (req, res, next) {
+  database.getCoursesInSubject(req.params.subject, function (err, r) {
+    if (err) { return next(err) }
+    res.json(r)
+  })
+})
+
 // GET: Lookup a course by abbreviation
 router.get('/:subject/:number', function getCourse (req, res, next) {
   database.getCourse(req.params.subject, parseInt(req.params.number), function (err, r) {
