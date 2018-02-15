@@ -105,11 +105,9 @@ describe('/search/buildings/<keyword>', () => {
     expect(response.statusCode).toBe(200)
   })
 
-  test('doesn\'t contain _id, _version, or prereqs field', async () => {
+  test('doesn\'t contain _id field', async () => {
     const response = await request(app).get('/search/buildings/kelley')
     expect(response.body).not.toHaveProperty('_id')
-    expect(response.body).not.toHaveProperty('_version')
-    expect(response.body).not.toHaveProperty('prereqs')
   })
 })
 

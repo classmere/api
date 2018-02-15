@@ -86,11 +86,10 @@ MongoClient.connect(url, function (err, db) {
       .find({
         $text: { $search: query }
       }, {
+        score: { $meta: 'textScore' },
         _id: 0,
         _version: 0,
         prereqs: 0
-      }, {
-        score: { $meta: 'textScore' }
       })
       .sort({ score: { $meta: 'textScore' } })
       .limit(100)
@@ -102,11 +101,8 @@ MongoClient.connect(url, function (err, db) {
       .find({
         $text: { $search: query }
       }, {
-        _id: 0,
-        _version: 0,
-        prereqs: 0
-      }, {
-        score: { $meta: 'textScore' }
+        score: { $meta: 'textScore' },
+        _id: 0
       })
       .sort({ score: { $meta: 'textScore' } })
       .limit(100)
