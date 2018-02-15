@@ -10,6 +10,12 @@ const app = require('../app')
 beforeAll(async () => {
   const url = process.env.MONGO_URL || 'mongodb://localhost:27017/test'
   await exec(`mongorestore --uri=${url} --drop ./__tests__/dump`)
+
+  let response = await request(app).get('/search/courses/music')
+  while (response.status === 500) {
+    await milliseconds(1000)
+    response = await request(app).get('/search/courses/music')
+  }
 })
 
 describe('/', () => {
@@ -132,4 +138,12 @@ function isISOString (dateString) {
   } catch (error) {
     return false
   }
+}
+
+function milliseconds (t) {
+  return new Promise(resolve => {
+    setTimeout(() => {
+      resolve()
+    }, t)
+  })
 }
