@@ -2,10 +2,10 @@
 The API server that powers classmere + API reference sheet.
 
 ## API Reference (beta)
-- [Courses](###Courses)
-- [Subjects](###Subjects)
-- [Buildings](###Buildings)
-- [Search](###Search)
+- [Courses](#courses)
+- [Subjects](#subjects)
+- [Buildings](#buildings)
+- [Search](#search)
 
 ### Courses
 #### Retrieve a course
