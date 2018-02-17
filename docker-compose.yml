@@ -11,14 +11,5 @@ services:
       - '5000:5000'
     depends_on:
       - mongo
-      - mongo_loader
   mongo:
     image: mongo
-    command: ['mongod']
-  mongo_loader:
-    image: mongo
-    volumes:
-      - ./__tests__/dump:/dump
-    depends_on:
-      - mongo
-    command: ['mongorestore', '--uri', 'mongodb://mongo:27017/test', '/dump']
